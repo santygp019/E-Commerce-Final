@@ -1,5 +1,9 @@
 package org.example.Datos;
 
+import org.example.Estados.EstadoUsuario;
+import org.example.Estados.Rol;
+
+import java.sql.Date;
 import java.time.LocalDateTime;
 
 public class Usuario {
@@ -7,19 +11,20 @@ public class Usuario {
     private String nombre;
     private String apellido;
     private String email;
-    private String contraseña;
-    private LocalDateTime fechaDeAlta;
-    private boolean activo;
+    private String contrasenia;
+    private Date fechaAlta;
+    private Rol roles;
+    private EstadoUsuario estado;
 
 
-    public Usuario(int id, String nombre, String apellido, String email, String contraseña, LocalDateTime fechaDeAlta, boolean activo) {
+    public Usuario(int id, String nombre, String apellido, String email, String contrasenia, Date fechaAlta, EstadoUsuario estado) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
-        this.contraseña = contraseña;
-        this.fechaDeAlta = fechaDeAlta;
-        this.activo = activo;
+        this.contrasenia = contrasenia;
+        this.fechaAlta = fechaAlta;
+        this.estado = estado;
 
     }
 
@@ -47,30 +52,26 @@ public class Usuario {
     public void setEmail(String email) {
         this.email = email;
     }
-    public String getContraseña() {
-        return contraseña;
+    public String getContrasenia() {
+        return contrasenia;
     }
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
     }
-    public LocalDateTime getFechaDeAlta() {
-        return fechaDeAlta;
+    public Date getFechaAlta() {
+        return fechaAlta;
     }
-    public void setFechaDeAlta(LocalDateTime fechaDeAlta) {
-        this.fechaDeAlta = fechaDeAlta;
+    public void setFechaAlta(Date fechaAlta) {
+        this.fechaAlta = fechaAlta;
     }
-    public boolean isActivo() {
-        return activo;
+    public Rol getRoles() {return roles;}
+    public void setRoles(Rol roles) {this.roles = roles;}
+    public EstadoUsuario getEstado() {
+        return estado;
     }
-    public void setActivo(boolean activo) {
-        this.activo = activo;
+    public void setEstado(EstadoUsuario estado) {
+        this.estado = estado;
     }
-
-
-
-
-
-
 
 }
 
