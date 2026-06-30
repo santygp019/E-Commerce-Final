@@ -22,7 +22,7 @@ public abstract class Producto {
         this.estado = estado;
     }
 
-    // Método abstracto para cumplir con el Polimorfismo
+
     public abstract double calcularPrecioFinal();
 
     // Getters y Setters

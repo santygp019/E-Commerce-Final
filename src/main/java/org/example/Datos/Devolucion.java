@@ -8,15 +8,15 @@ public class Devolucion {
     private Producto producto;
     private String motivo;
     private Date fecha;
-    private String estado; // Podés manejarlo como String o reusar un Enum ("PENDIENTE", "ACEPTADA", "RECHAZADA")
 
-    public Devolucion(int id, Usuario cliente, Producto producto, String motivo, String estado) {
+
+    public Devolucion(int id, Usuario cliente, Producto producto, String motivo) {
         this.id = id;
         this.cliente = cliente;
         this.producto = producto;
         this.motivo = motivo;
         this.fecha = new Date();
-        this.estado = estado;
+
     }
 
     public int getId() {
@@ -44,13 +44,9 @@ public class Devolucion {
     public void setFecha(Date fecha) {
         this.fecha = fecha; }
 
-    public String getEstado() {
-        return estado; }
-    public void setEstado(String estado) {
-        this.estado = estado; }
 
     @Override
     public String toString() {
-        return "Devolucion N°" + id + " - Producto: " + producto.getNombre() + " (" + estado + ")";
+        return "Devolucion N°" + id + " - Producto: " + producto.getNombre() + " ";
     }
 }
