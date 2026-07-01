@@ -12,18 +12,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UsuarioDAOMySQL implements UsuarioDAO {
-    private Connection conexion;
+    private Connection instancia;
+
+    public UsuarioDAOMySQL(){
+        this.instancia = DBConnection.getConexion();
+    }
 
     @Override
     public void guardar(Usuario usuario) {
         String sql = "INSERT INTO usuarios (nombre, apellido, email, contrasena, fecha_alta, estado, rol) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
-        try (PreparedStatement ps = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+        try (PreparedStatement ps = instancia.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, usuario.getNombre());
             ps.setString(2, usuario.getApellido());
             ps.setString(3, usuario.getEmail());
             ps.setString(4, usuario.getContrasenia());
-            ps.setDate(5, usuario.getFechaAlta());
+            ps.setObject(5, usuario.getFechaDeAlta());
             ps.setString(6, String.valueOf(usuario.getEstado()));
             ps.setString(7, String.valueOf(usuario.getRoles()));
 
@@ -49,7 +53,7 @@ public class UsuarioDAOMySQL implements UsuarioDAO {
         String sql = "SELECT * FROM usuarios WHERE id = ?";
         Usuario usuario = null;
 
-        try (PreparedStatement ps = conexion.prepareStatement(sql)) {
+        try (PreparedStatement ps = instancia.prepareStatement(sql)) {
             ps.setInt(1, id);
 
             try (ResultSet rs = ps.executeQuery()) {
@@ -72,7 +76,7 @@ public class UsuarioDAOMySQL implements UsuarioDAO {
         String sql = "SELECT * FROM usuarios WHERE email = ?";
         Usuario usuario = null;
 
-        try (PreparedStatement ps = conexion.prepareStatement(sql)) {
+        try (PreparedStatement ps = instancia.prepareStatement(sql)) {
             ps.setString(1, email);
 
             try (ResultSet rs = ps.executeQuery()) {
@@ -94,7 +98,7 @@ public class UsuarioDAOMySQL implements UsuarioDAO {
         List<Usuario> usuarios = new ArrayList<>();
         String sql = "SELECT * FROM usuarios";
 
-        try (PreparedStatement ps = conexion.prepareStatement(sql);
+        try (PreparedStatement ps = instancia.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
                 usuarios.add(extraerUsuarioDeResultSet(rs));
@@ -111,7 +115,7 @@ public class UsuarioDAOMySQL implements UsuarioDAO {
     public void actualizar(Usuario usuario) {
         String sql = "UPDATE usuarios SET nombre = ?, apellido = ?, email = ?, contrasena = ?, estado = ?, rol = ? WHERE id = ?";
 
-        try (PreparedStatement ps = conexion.prepareStatement(sql)) {
+        try (PreparedStatement ps = instancia.prepareStatement(sql)) {
             ps.setString(1, usuario.getNombre());
             ps.setString(2, usuario.getApellido());
             ps.setString(3, usuario.getEmail());
@@ -137,7 +141,7 @@ public class UsuarioDAOMySQL implements UsuarioDAO {
     public void eliminar(int id) {
         String sql = "DELETE FROM usuarios WHERE id = ?";
 
-        try (PreparedStatement ps = conexion.prepareStatement(sql)) {
+        try (PreparedStatement ps = instancia.prepareStatement(sql)) {
             ps.setInt(1, id);
 
             int filasAfectadas = ps.executeUpdate();
@@ -163,7 +167,7 @@ public class UsuarioDAOMySQL implements UsuarioDAO {
                 rs.getString("apellido"),
                 rs.getString("email"),
                 rs.getString("contrasena"),
-                rs.getDate("fecha_alta"),
+                rs.getTimestamp("fecha_alta").toLocalDateTime(),
                 estadoEnum
         );
         usuario.setRoles(rolEnum);
