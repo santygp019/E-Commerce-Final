@@ -3,66 +3,53 @@ package org.example.Datos;
 import org.example.Estados.EstadoProducto;
 
 public abstract class Producto {
-    private int id;
+    private String codigoUnico;
     private String nombre;
     private String descripcion;
-    private double precioBase;
-    private int stock;
+    private double precio;
     private Categoria categoria;
+    private int stock;
+    private double peso;
     private EstadoProducto estado;
 
-    // Constructor Completo
-    public Producto(int id, String nombre, String descripcion, double precioBase, int stock, Categoria categoria, EstadoProducto estado) {
-        this.id = id;
+    public Producto(String codigoUnico, String nombre, String descripcion, double precio, Categoria categoria, int stock, double peso, EstadoProducto estado) {
+        this.codigoUnico = codigoUnico;
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.precioBase = precioBase;
-        this.stock = stock;
+        this.precio = precio;
         this.categoria = categoria;
+        this.stock = stock;
+        this.peso = peso;
         this.estado = estado;
     }
 
 
     public abstract double calcularPrecioFinal();
+    public abstract void mostrarInformacion();
 
-    // Getters y Setters
-    public int getId() {
-        return id; }
-    public void setId(int id) {
-        this.id = id; }
+    public boolean validarDisponibilidad(int cantidad) {
+        return this.stock >= cantidad && this.estado == EstadoProducto.Activo;
+    }
 
+    public void aplicarDescuento(double porcentaje) {
+        if (porcentaje > 0 && porcentaje <= 100) {
+            this.precio -= this.precio * (porcentaje / 100);
+        }
+    }
+
+
+    public String getCodigoUnico() {
+        return codigoUnico; }
     public String getNombre() {
         return nombre; }
-    public void setNombre(String nombre) {
-        this.nombre = nombre; }
-
-    public String getDescripcion() {
-        return descripcion; }
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion; }
-
-    public double getPrecioBase() {
-        return precioBase; }
-    public void setPrecioBase(double precioBase) {
-        this.precioBase = precioBase; }
-
+    public double getPrecio() {
+        return precio; }
     public int getStock() {
         return stock; }
     public void setStock(int stock) {
         this.stock = stock; }
-
-    public Categoria getCategoria() {
-        return categoria; }
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria; }
-
     public EstadoProducto getEstado() {
         return estado; }
     public void setEstado(EstadoProducto estado) {
         this.estado = estado; }
-
-    @Override
-    public String toString() {
-        return nombre + " (Precio Base: $" + precioBase + " | Stock: " + stock + ")";
-    }
 }
