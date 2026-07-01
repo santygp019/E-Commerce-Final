@@ -4,7 +4,8 @@ import org.example.Datos.Categoria;
 
 public interface DAOFactory {
     UsuarioDAO crearUsuarioDAO();
-    /*CategoriaDAO crearCategoriaDAO();
+    CategoriaDAO crearCategoriaDAO();
     ProductoDAO crearProductoDAO();
-    OrdenDAO crearOrdenDAO();*/
+    OrdenDAO crearOrdenDAO();
+    CalificacionDAO crearCalificacionDAO();
 }

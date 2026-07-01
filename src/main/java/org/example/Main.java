@@ -55,8 +55,8 @@ public class Main {
 
         for (Categoria c :listaDesdeDB){
             System.out.println("ID " + c.getId() +
-                    "Nombre " + c.getNombre() +
-                    "Estado" + c.getEstado());
+                    " Nombre " + c.getNombre() +
+                    " Estado " + c.getEstado());
         }
 
 
