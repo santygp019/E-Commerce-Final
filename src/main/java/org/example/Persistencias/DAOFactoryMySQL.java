@@ -2,7 +2,7 @@ package org.example.Persistencias;
 
 import org.example.Interfaces.*;
 import org.example.Interfaces.DAOFactory;
-import org.example.Interfaces.OrdenDAO;
+import org.example.Interfaces.OrdenCompraDAO;
 import org.example.Interfaces.ProductoDAO;
 
 public class DAOFactoryMySQL implements DAOFactory {
@@ -23,8 +23,13 @@ public class DAOFactoryMySQL implements DAOFactory {
     }
 
     @Override
-    public OrdenDAO crearOrdenDAO() {
+    public OrdenCompraDAO crearOrdenCompraDAO() {
         return null;
+    }
+
+    @Override
+    public ReclamoDAO crearReclamoDAO() {
+        return new ReclamoDAOMySQL(crearUsuarioDAO(), crearOrdenCompraDAO());
     }
 
     @Override

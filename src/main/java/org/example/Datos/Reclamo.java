@@ -1,59 +1,49 @@
 package org.example.Datos;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import org.example.Estados.EstadoReclamo;
 
 public class Reclamo {
     private int numero;
-    private String motivo;
-    private Date fecha;
-    private EstadoReclamo estado;
-    private int numeroReclamo;
     private Usuario cliente;
     private OrdenCompra pedidoAsociado;
+    private String motivo;
+    private LocalDateTime fecha;
+    private EstadoReclamo estado;
 
-    public Reclamo(int numeroReclamo, Usuario cliente, OrdenCompra pedidoAsociado, String motivo, EstadoReclamo estado) {
-        this.numeroReclamo = numeroReclamo;
+    public Reclamo(int numero, Usuario cliente, OrdenCompra pedidoAsociado, String motivo, LocalDateTime fecha, EstadoReclamo estado) {
+        this.numero = numero;
         this.cliente = cliente;
         this.pedidoAsociado = pedidoAsociado;
         this.motivo = motivo;
-        this.fecha = new Date();
+        this.fecha = fecha;
         this.estado = estado;
     }
 
-    public int getNumeroReclamo() {
-        return numeroReclamo;
+    public Reclamo(Usuario cliente, OrdenCompra pedidoAsociado, String motivo, LocalDateTime fecha, EstadoReclamo estado) {
+        this.cliente = cliente;
+        this.pedidoAsociado = pedidoAsociado;
+        this.motivo = motivo;
+        this.fecha = fecha;
+        this.estado = estado;
     }
-    public void setNumeroReclamo(int numeroReclamo) {
-    this.numeroReclamo = numeroReclamo; }
 
-    public Usuario getCliente() {
-    return cliente; }
-    public void setCliente(Usuario cliente) {
-    this.cliente = cliente; }
+    public int getNumero() { return numero; }
+    public void setNumero(int numero) { this.numero = numero; }
 
-    public OrdenCompra getPedidoAsociado() {
-    return pedidoAsociado; }
-    public void setPedidoAsociado(OrdenCompra pedidoAsociado) {
-    this.pedidoAsociado = pedidoAsociado; }
+    public Usuario getCliente() { return cliente; }
+    public void setCliente(Usuario cliente) { this.cliente = cliente; }
 
-    public String getMotivo() {
-    return motivo; }
-    public void setMotivo(String motivo) {
-    this.motivo = motivo; }
+    public OrdenCompra getPedidoAsociado() { return pedidoAsociado; }
+    public void setPedidoAsociado(OrdenCompra pedidoAsociado) { this.pedidoAsociado = pedidoAsociado; }
 
-    public Date getFecha() {
-    return fecha; }
-    public void setFecha(Date fecha) {
-    this.fecha = fecha; }
+    public String getMotivo() { return motivo; }
+    public void setMotivo(String motivo) { this.motivo = motivo; }
 
-    public EstadoReclamo getEstado() {
-    return estado; }
-    public void setEstado(EstadoReclamo estado) {
-    this.estado = estado; }
+    public LocalDateTime getFecha() { return fecha; }
+    public void setFecha(LocalDateTime fecha) { this.fecha = fecha; }
 
-    @Override
-    public String toString() {
-        return "Reclamo N°" + numeroReclamo + " [" + estado + "] - Motivo: " + motivo;
-    }
+    public EstadoReclamo getEstado() { return estado; }
+    public void setEstado(EstadoReclamo estado) { this.estado = estado; }
 }
