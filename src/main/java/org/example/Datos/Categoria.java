@@ -8,8 +8,17 @@ public class Categoria {
     private String descripcion;
     private EstadoCategoria estado;
 
+
+    //Constructor con ID para que lo use el DAO
     public Categoria(int id, String nombre, String descripcion, EstadoCategoria estado) {
         this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.estado = estado;
+    }
+
+    //Constructor Sin ID para que se pueda crear un categoria nueva y Mysql le asigne solo el ID con el autoincremental
+    public Categoria(String nombre, String descripcion, EstadoCategoria estado) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.estado = estado;
