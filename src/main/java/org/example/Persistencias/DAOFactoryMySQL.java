@@ -19,7 +19,7 @@ public class DAOFactoryMySQL implements DAOFactory {
 
     @Override
     public ProductoDAO crearProductoDAO() {
-        return null;
+        return new ProductoDAOMySQL();
     }
 
     @Override

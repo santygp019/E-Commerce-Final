@@ -1,14 +1,14 @@
 package org.example;
 
-import org.example.Datos.Calificacion;
-import org.example.Datos.Producto;
-import org.example.Datos.Usuario;
+import org.example.Datos.*;
+import org.example.Estados.EstadoProducto;
 import org.example.Interfaces.CalificacionDAO;
 import org.example.Interfaces.DAOFactory;
 import org.example.Interfaces.ProductoDAO;
 import org.example.Interfaces.UsuarioDAO;
+import org.example.Persistencias.CategoriaDAOMySQL;
 import org.example.Persistencias.DAOFactoryMySQL;
-
+/*
 public class Main2 {
     static void main(String[] args) {
 
@@ -18,7 +18,7 @@ public class Main2 {
         ProductoDAO productoDAO = factory.crearProductoDAO();
         CalificacionDAO calificacionDAO = factory.crearCalificacionDAO();
 
-        try{
+        try {
             Usuario cliente = usuarioDAO.buscarPorId(1);
             Producto producto = productoDAO.buscarPorId("PROD-001");
 
@@ -46,6 +46,29 @@ public class Main2 {
             System.err.println(" Ocurrió un error en la prueba.");
             e.printStackTrace();
         }
+*/
+public class Main2 {
+   public static void main(String[] args) {
 
+        DAOFactory factory = new DAOFactoryMySQL();
+
+        UsuarioDAO usuarioDAO = factory.crearUsuarioDAO();
+        ProductoDAO productoDAO = factory.crearProductoDAO();
+        CalificacionDAO calificacionDAO = factory.crearCalificacionDAO();
+
+        try {
+            Categoria cat = new CategoriaDAOMySQL().buscarPorId(1);
+
+            Producto p = new ProductoFisico("P001", "Auriculares", "Auriculares inalámbricos", 15000, cat, 10, 0.3, EstadoProducto.Activo);
+            productoDAO.guardar(p);
+            System.out.println("Producto guardado con éxito.");
+
+            Producto encontrado = productoDAO.buscarPorId("P001");
+            encontrado.mostrarInformacion();
+
+        } catch (RuntimeException e) {
+            System.err.println("Ocurrió un error probando Producto.");
+            e.printStackTrace();
+        }
     }
 }
