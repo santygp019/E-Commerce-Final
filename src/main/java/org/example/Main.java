@@ -19,24 +19,14 @@ import java.util.List;
 public class Main {
     static void main() {
         System.out.println("Iniciando Sistema E-Commerce...");
-    /*
+
         try{
             DBConnection.getConexion();
         } catch (RuntimeException e) {
             System.out.println("El sistema no puede iniciar debido a un problema con la base de datos.");
             System.out.println("Por Favor, contacte al Admin.");
         }
-        DAOFactory factory = new DAOFactoryMySQL();
 
-        UsuarioDAO usuarioDAO = factory.crearUsuarioDAO();
-
-        Usuario nuevoUsuario = new Usuario("Leonel", "Messi", "leo.messi@davinci.edu.ar", "campeon123", LocalDateTime.now(), EstadoUsuario.ACTIVO);
-
-        nuevoUsuario.setRoles(Rol.CLIENTE);
-
-        usuarioDAO.guardar(nuevoUsuario);
-        System.out.println("¡Usuario insertado en MySQL exitosamente!");
-        */
 
         // prueba de categoria en la base de datos
 
